@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#load balancer
 # A program that install nginx and configure it with custom header.
 sudo apt update -y
 sudo apt install nginx -y
@@ -17,32 +16,4 @@ new_config=\
 "
 sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
 echo "$new_config" > /etc/nginx/sites-available/default
-=======
-# Web server 2
-sudo apt remove --purge nginx nginx-full nginx-common -y
-sudo apt update
-sudo apt install nginx -y
-sudo touch /var/www/html/index.html
-
-echo "Holberton School" | sudo tee /var/www/html/index.html
-sudo touch /var/www/html/error404.html
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
-
-printf %s 'server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        root /var/www/html;
-        index index.html;
-        error_page 404 /error404.html;
-        server_name _;
-        
-        add_header X-Served-By $hostname;
-        
-        location /redirect_me {
-           return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
-        }
-}
-' | sudo tee /etc/nginx/sites-available/default
-
->>>>>>> de8d832260c8167105d13ced53641b1e27133495
 sudo service nginx restart
