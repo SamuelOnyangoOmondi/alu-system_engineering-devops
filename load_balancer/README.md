@@ -1,1 +1,1 @@
-Load balancer
+Load balancer.An additional server
